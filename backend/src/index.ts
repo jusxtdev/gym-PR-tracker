@@ -2,7 +2,8 @@ import { config } from "dotenv";
 import express from "express"
 import type { Request, Response } from "express";
 
-import { connectDB, prisma, disconnectDB } from "./config/db.js";
+import { connectDB, disconnectDB } from "./config/db.js";
+import rootRouter from "./routes/root.router.js";
 
 config()
 connectDB()
@@ -11,9 +12,7 @@ const app = express()
 app.use(express.json())
 const PORT = process.env.PORT || 3000;
 
-app.get('/', (req : Request, res: Response) => {
-    res.send("HELLO From TypeScript")
-})
+app.use('/api', rootRouter)
 
 
 const server = app.listen(PORT, () => {
