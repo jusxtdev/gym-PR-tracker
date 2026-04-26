@@ -1,0 +1,69 @@
+node_modules
+# Keep environment variables out of version control
+.env
+
+/src/generated/prisma
+# 🔹 Dependencies
+
+node_modules/
+
+# 🔹 Logs
+
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 🔹 Runtime data
+
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# 🔹 Environment variables
+
+.env
+.env.*
+!.env.example
+
+# 🔹 Build output
+
+dist/
+build/
+
+# 🔹 Coverage reports
+
+coverage/
+
+# 🔹 OS files
+
+.DS_Store
+Thumbs.db
+
+# 🔹 Editor folders
+
+.vscode/
+.idea/
+
+# 🔹 Temporary files
+
+tmp/
+temp/
+
+# 🔹 Optional: uploads (if your API stores files)
+
+uploads/
+
+# 🔹 Optional: database files
+
+*.sqlite
+*.db
+
+# 🔹 Optional: cache
+
+.cache/
+
+/src/generated/prisma
