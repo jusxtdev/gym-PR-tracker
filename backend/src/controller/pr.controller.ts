@@ -32,14 +32,14 @@ const createPr = async (req: Request, res: Response) => {
             weight,
             reps,
             PR,
-            user_id :userId!
+            user_id: userId!
         }
     })
 
     // respond
     res.status(201).json({
-        status : "success",
-        data : {
+        status: "success",
+        data: {
             exercise_title,
             weight,
             reps,
@@ -50,6 +50,63 @@ const createPr = async (req: Request, res: Response) => {
 
 }
 
-const prController = { createPr }
+const getAllPr = async (req: Request, res: Response) => {
+    const userId = req.userId
+
+    const prForUser = await prisma.pR.findMany({
+        where: {
+            user_id: userId!
+        },
+        select: {
+            id: true,
+            exercise_title: true,
+            remarks: true,
+            weight: true,
+            reps: true,
+            PR: true,
+            updated_at: true
+        }
+    })
+
+    res.status(200).json({
+        status: "success",
+        data: prForUser
+    })
+}
+
+const getPrById = async (req: Request, res: Response) => {
+    const id = Number(req.params.id)
+    const userId = req.userId
+
+    const prForUser = await prisma.pR.findFirst({
+        where: {
+            user_id: userId!,
+            id : id
+        },
+        select: {
+            id: true,
+            exercise_title: true,
+            remarks: true,
+            weight: true,
+            reps: true,
+            PR: true,
+            updated_at: true
+        }
+    })
+
+    if (!prForUser){
+        return res.status(404).json({
+            status : 'failure',
+            error : `Exercise with id ${id} not found`
+        })
+    }
+
+    res.status(200).json({
+        status: "success",
+        data: prForUser
+    })
+}
+
+const prController = { createPr, getAllPr, getPrById }
 
 export default prController

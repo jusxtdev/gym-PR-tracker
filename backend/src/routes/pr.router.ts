@@ -10,9 +10,9 @@ router.use(authMiddleware)
 
 router.post('/', validate(prSchema.createPr), prController.createPr)
 
-// router.get('/')
+router.get('/', prController.getAllPr)
 
-// router.get('/:id')
+router.get('/:id', prController.getPrById)
 
 // router.put('/:id', validate(prSchema.updatePr))
 
