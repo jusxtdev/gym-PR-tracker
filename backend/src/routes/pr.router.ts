@@ -4,7 +4,7 @@ import authMiddleware from "../middleware/auth.middleware.js"
 const router = express.Router()
 
 router.get('/', authMiddleware, async (req : Request, res : Response) => {
-    res.send("YOUR pr's")
+    res.send(req.userId)
 })
 
 export default router
