@@ -1,10 +1,21 @@
 import express, { type Request, type Response } from "express"
 import authMiddleware from "../middleware/auth.middleware.js"
+import { validate } from "../middleware/validate.middleware.js"
+import prSchema from "../schema/pr.schema.js"
+import prController from "../controller/pr.controller.js"
 
 const router = express.Router()
 
-router.get('/', authMiddleware, async (req : Request, res : Response) => {
-    res.send(req.userId)
-})
+router.use(authMiddleware)
+
+router.post('/', validate(prSchema.createPr), prController.createPr)
+
+// router.get('/')
+
+// router.get('/:id')
+
+// router.put('/:id', validate(prSchema.updatePr))
+
+// router.delete('/:id')
 
 export default router

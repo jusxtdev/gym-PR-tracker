@@ -222,7 +222,7 @@ export type PRGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type PRGroupByOutputType = {
   id: number
   exercise_title: string
-  remarks: string
+  remarks: string | null
   weight: number
   reps: number
   PR: number
@@ -257,7 +257,7 @@ export type PRWhereInput = {
   NOT?: Prisma.PRWhereInput | Prisma.PRWhereInput[]
   id?: Prisma.IntFilter<"PR"> | number
   exercise_title?: Prisma.StringFilter<"PR"> | string
-  remarks?: Prisma.StringFilter<"PR"> | string
+  remarks?: Prisma.StringNullableFilter<"PR"> | string | null
   weight?: Prisma.FloatFilter<"PR"> | number
   reps?: Prisma.IntFilter<"PR"> | number
   PR?: Prisma.FloatFilter<"PR"> | number
@@ -270,7 +270,7 @@ export type PRWhereInput = {
 export type PROrderByWithRelationInput = {
   id?: Prisma.SortOrder
   exercise_title?: Prisma.SortOrder
-  remarks?: Prisma.SortOrder
+  remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrder
   reps?: Prisma.SortOrder
   PR?: Prisma.SortOrder
@@ -287,7 +287,7 @@ export type PRWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PRWhereInput[]
   NOT?: Prisma.PRWhereInput | Prisma.PRWhereInput[]
   exercise_title?: Prisma.StringFilter<"PR"> | string
-  remarks?: Prisma.StringFilter<"PR"> | string
+  remarks?: Prisma.StringNullableFilter<"PR"> | string | null
   weight?: Prisma.FloatFilter<"PR"> | number
   reps?: Prisma.IntFilter<"PR"> | number
   PR?: Prisma.FloatFilter<"PR"> | number
@@ -300,7 +300,7 @@ export type PRWhereUniqueInput = Prisma.AtLeast<{
 export type PROrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   exercise_title?: Prisma.SortOrder
-  remarks?: Prisma.SortOrder
+  remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrder
   reps?: Prisma.SortOrder
   PR?: Prisma.SortOrder
@@ -320,7 +320,7 @@ export type PRScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PRScalarWhereWithAggregatesInput | Prisma.PRScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"PR"> | number
   exercise_title?: Prisma.StringWithAggregatesFilter<"PR"> | string
-  remarks?: Prisma.StringWithAggregatesFilter<"PR"> | string
+  remarks?: Prisma.StringNullableWithAggregatesFilter<"PR"> | string | null
   weight?: Prisma.FloatWithAggregatesFilter<"PR"> | number
   reps?: Prisma.IntWithAggregatesFilter<"PR"> | number
   PR?: Prisma.FloatWithAggregatesFilter<"PR"> | number
@@ -331,7 +331,7 @@ export type PRScalarWhereWithAggregatesInput = {
 
 export type PRCreateInput = {
   exercise_title: string
-  remarks: string
+  remarks?: string | null
   weight: number
   reps: number
   PR: number
@@ -343,7 +343,7 @@ export type PRCreateInput = {
 export type PRUncheckedCreateInput = {
   id?: number
   exercise_title: string
-  remarks: string
+  remarks?: string | null
   weight: number
   reps: number
   PR: number
@@ -354,7 +354,7 @@ export type PRUncheckedCreateInput = {
 
 export type PRUpdateInput = {
   exercise_title?: Prisma.StringFieldUpdateOperationsInput | string
-  remarks?: Prisma.StringFieldUpdateOperationsInput | string
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
   PR?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -366,7 +366,7 @@ export type PRUpdateInput = {
 export type PRUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   exercise_title?: Prisma.StringFieldUpdateOperationsInput | string
-  remarks?: Prisma.StringFieldUpdateOperationsInput | string
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
   PR?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -378,7 +378,7 @@ export type PRUncheckedUpdateInput = {
 export type PRCreateManyInput = {
   id?: number
   exercise_title: string
-  remarks: string
+  remarks?: string | null
   weight: number
   reps: number
   PR: number
@@ -389,7 +389,7 @@ export type PRCreateManyInput = {
 
 export type PRUpdateManyMutationInput = {
   exercise_title?: Prisma.StringFieldUpdateOperationsInput | string
-  remarks?: Prisma.StringFieldUpdateOperationsInput | string
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
   PR?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -400,7 +400,7 @@ export type PRUpdateManyMutationInput = {
 export type PRUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   exercise_title?: Prisma.StringFieldUpdateOperationsInput | string
-  remarks?: Prisma.StringFieldUpdateOperationsInput | string
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
   PR?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -518,6 +518,10 @@ export type PRUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.PRScalarWhereInput | Prisma.PRScalarWhereInput[]
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type FloatFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -528,7 +532,7 @@ export type FloatFieldUpdateOperationsInput = {
 
 export type PRCreateWithoutUserInput = {
   exercise_title: string
-  remarks: string
+  remarks?: string | null
   weight: number
   reps: number
   PR: number
@@ -539,7 +543,7 @@ export type PRCreateWithoutUserInput = {
 export type PRUncheckedCreateWithoutUserInput = {
   id?: number
   exercise_title: string
-  remarks: string
+  remarks?: string | null
   weight: number
   reps: number
   PR: number
@@ -579,7 +583,7 @@ export type PRScalarWhereInput = {
   NOT?: Prisma.PRScalarWhereInput | Prisma.PRScalarWhereInput[]
   id?: Prisma.IntFilter<"PR"> | number
   exercise_title?: Prisma.StringFilter<"PR"> | string
-  remarks?: Prisma.StringFilter<"PR"> | string
+  remarks?: Prisma.StringNullableFilter<"PR"> | string | null
   weight?: Prisma.FloatFilter<"PR"> | number
   reps?: Prisma.IntFilter<"PR"> | number
   PR?: Prisma.FloatFilter<"PR"> | number
@@ -591,7 +595,7 @@ export type PRScalarWhereInput = {
 export type PRCreateManyUserInput = {
   id?: number
   exercise_title: string
-  remarks: string
+  remarks?: string | null
   weight: number
   reps: number
   PR: number
@@ -601,7 +605,7 @@ export type PRCreateManyUserInput = {
 
 export type PRUpdateWithoutUserInput = {
   exercise_title?: Prisma.StringFieldUpdateOperationsInput | string
-  remarks?: Prisma.StringFieldUpdateOperationsInput | string
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
   PR?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -612,7 +616,7 @@ export type PRUpdateWithoutUserInput = {
 export type PRUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   exercise_title?: Prisma.StringFieldUpdateOperationsInput | string
-  remarks?: Prisma.StringFieldUpdateOperationsInput | string
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
   PR?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -623,7 +627,7 @@ export type PRUncheckedUpdateWithoutUserInput = {
 export type PRUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   exercise_title?: Prisma.StringFieldUpdateOperationsInput | string
-  remarks?: Prisma.StringFieldUpdateOperationsInput | string
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
   PR?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -703,7 +707,7 @@ export type $PRPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     exercise_title: string
-    remarks: string
+    remarks: string | null
     weight: number
     reps: number
     PR: number

@@ -24,7 +24,7 @@ model User {
 model PR{
   id Int @id @default(autoincrement())
   exercise_title String
-  remarks String
+  remarks String?
   weight Float
   reps Int
   PR Float
