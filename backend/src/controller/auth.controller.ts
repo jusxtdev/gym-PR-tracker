@@ -57,7 +57,7 @@ const signupUser = async (req: Request, res: Response) => {
 
 const signInUser = async (req: Request, res: Response) => {
     const { username, password } = req.body
-
+    
     // check if userExists
     const user = await prisma.user.findUnique({
         where : {

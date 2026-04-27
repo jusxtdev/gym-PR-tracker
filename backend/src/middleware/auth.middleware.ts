@@ -24,9 +24,11 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
         // check if user exists
         console.log(decoded)
 
-        // attach user object to req   
+        // attach user object to req 
+        next()
     } catch (error) {
         console.log(error)
+        res.send("err")
     }
 }
 
