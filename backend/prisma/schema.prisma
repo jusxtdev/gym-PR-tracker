@@ -23,7 +23,7 @@ model User {
 
 model PR{
   id Int @id @default(autoincrement())
-  exercise_title String @unique
+  exercise_title String
   remarks String
   weight Float
   reps Int
@@ -31,6 +31,9 @@ model PR{
 
   user_id Int
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  
+  // this ensures that one user cannot have two exercises with same title
+  @@unique([user_id,  exercise_title])
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

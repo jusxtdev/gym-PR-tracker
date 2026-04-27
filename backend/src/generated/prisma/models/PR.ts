@@ -282,10 +282,11 @@ export type PROrderByWithRelationInput = {
 
 export type PRWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  exercise_title?: string
+  user_id_exercise_title?: Prisma.PRUser_idExercise_titleCompoundUniqueInput
   AND?: Prisma.PRWhereInput | Prisma.PRWhereInput[]
   OR?: Prisma.PRWhereInput[]
   NOT?: Prisma.PRWhereInput | Prisma.PRWhereInput[]
+  exercise_title?: Prisma.StringFilter<"PR"> | string
   remarks?: Prisma.StringFilter<"PR"> | string
   weight?: Prisma.FloatFilter<"PR"> | number
   reps?: Prisma.IntFilter<"PR"> | number
@@ -294,7 +295,7 @@ export type PRWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"PR"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PR"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id" | "exercise_title">
+}, "id" | "user_id_exercise_title">
 
 export type PROrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -416,6 +417,11 @@ export type PRListRelationFilter = {
 
 export type PROrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type PRUser_idExercise_titleCompoundUniqueInput = {
+  user_id: number
+  exercise_title: string
 }
 
 export type PRCountOrderByAggregateInput = {
