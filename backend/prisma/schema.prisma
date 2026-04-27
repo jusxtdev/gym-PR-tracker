@@ -27,7 +27,7 @@ model PR{
   remarks String?
   weight Float
   reps Int
-  PR Float
+  PR Float? @default(dbgenerated())
 
   user_id Int
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)

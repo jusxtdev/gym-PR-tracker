@@ -14,7 +14,7 @@ router.get('/', prController.getAllPr)
 
 router.get('/:id', prController.getPrById)
 
-// router.put('/:id', validate(prSchema.updatePr))
+router.put('/:id', validate(prSchema.updatePr), prController.updatePrById)
 
 // router.delete('/:id')
 

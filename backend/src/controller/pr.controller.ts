@@ -81,7 +81,7 @@ const getPrById = async (req: Request, res: Response) => {
     const prForUser = await prisma.pR.findFirst({
         where: {
             user_id: userId!,
-            id : id
+            id: id
         },
         select: {
             id: true,
@@ -94,10 +94,10 @@ const getPrById = async (req: Request, res: Response) => {
         }
     })
 
-    if (!prForUser){
+    if (!prForUser) {
         return res.status(404).json({
-            status : 'failure',
-            error : `Exercise with id ${id} not found`
+            status: 'failure',
+            error: `Exercise with id ${id} not found`
         })
     }
 
@@ -107,6 +107,31 @@ const getPrById = async (req: Request, res: Response) => {
     })
 }
 
-const prController = { createPr, getAllPr, getPrById }
+const updatePrById = async (req: Request, res: Response) => {
+    const prId = Number(req.params.id)
+    const updateData = req.body
+
+    const updatedPr = await prisma.pR.update({
+        where: {
+            id: prId
+        },
+        data: updateData,
+        select: {
+            id: true,
+            exercise_title: true,
+            remarks: true,
+            weight: true,
+            reps: true,
+            PR: true,
+            updated_at: true
+        }
+    })
+
+    res.status(200).json({
+        status: 'success',
+        data: updatedPr
+    })
+}
+const prController = { createPr, getAllPr, getPrById, updatePrById }
 
 export default prController
