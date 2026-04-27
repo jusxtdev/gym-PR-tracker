@@ -7,7 +7,7 @@ export const validate = (schema: ZodObject) => async (req: Request, res: Respons
 
     if (!valid.success) {
         const errorMessage = valid.error.issues.map((issue) => issue.message).join(' | ')
-        res.status(400).json({
+        return res.status(400).json({
             status: 'failure',
             error: errorMessage
         })

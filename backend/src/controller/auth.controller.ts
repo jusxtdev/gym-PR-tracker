@@ -14,7 +14,7 @@ const signupUser = async (req: Request, res: Response) => {
         }
     })
     if (exists) {
-        res
+        return res
             .status(400)
             .json({
                 staus: "failure",
@@ -65,7 +65,7 @@ const signInUser = async (req: Request, res: Response) => {
         }
     })
     if (!user) { 
-        res.status(404).json({
+        return res.status(404).json({
             status : "failure",
             error : "User Not Found"
         })
@@ -74,7 +74,7 @@ const signInUser = async (req: Request, res: Response) => {
     // validate password
     const isValidPassword = await bcrypt.compare(password, user!.password)
     if (!isValidPassword){
-        res.status(400).json({
+        return res.status(400).json({
             status : "failure",
             error : "Incorrect Password"
         })
@@ -100,10 +100,7 @@ const signInUser = async (req: Request, res: Response) => {
 }
 
 const logoutUser = async (req: Request, res: Response) => {
-    res.cookie("jwt", {
-        httpOnly: true,
-        expires: new Date(0),
-    })
+    res.clearCookie("jwt")
     res.status(200).json({
         status : "success",
         msg : "Logged out successfully"
