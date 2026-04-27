@@ -4,7 +4,7 @@ import { prisma } from "../config/db.js";
 import generateToken from "../utils/generateToken.js";
 import storeCookie from "../utils/storeCookie.js";
 
-const postUser = async (req: Request, res: Response) => {
+const signupUser = async (req: Request, res: Response) => {
     const { username, password } = req.body
 
     // check if user already exists
@@ -46,14 +46,58 @@ const postUser = async (req: Request, res: Response) => {
 
     // respond
     res.status(201).json({
-        status : "success",
-        data : {
-            id : newUser.id,
-            username : newUser.username,
+        status: "success",
+        data: {
+            id: newUser.id,
+            username: newUser.username,
         }
     })
 }
 
-const userController = { postUser }
+const signInUser = async (req: Request, res: Response) => {
+    const { username, password } = req.body
+
+    // check if userExists
+    const user = await prisma.user.findUnique({
+        where : {
+            username : username
+        }
+    })
+    if (!user) { 
+        res.status(404).json({
+            status : "failure",
+            error : "User Not Found"
+        })
+    }
+
+    // validate password
+    const isValidPassword = await bcrypt.compare(password, user!.password)
+    if (!isValidPassword){
+        res.status(400).json({
+            status : "failure",
+            error : "Incorrect Password"
+        })
+    }
+
+    // generate token
+    const payload = {
+        id: user!.id,
+        username: user!.username
+    }
+    const token = generateToken(payload)
+
+    // store token in cookie
+    storeCookie("jwt", token, res)
+
+    // respond
+    res.status(200).json({
+        status : "success",
+        data : {
+            token
+        }
+    })
+}
+
+const userController = { signupUser, signInUser}
 
 export default userController

@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 import express from "express"
-import type { Request, Response } from "express";
+import cookieParser from "cookie-parser"
 
 import { connectDB, disconnectDB } from "./config/db.js";
 import rootRouter from "./routes/root.router.js";
@@ -10,6 +10,8 @@ connectDB()
 
 const app = express()
 app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(cookieParser())
 const PORT = process.env.PORT || 3000;
 
 app.use('/api', rootRouter)
