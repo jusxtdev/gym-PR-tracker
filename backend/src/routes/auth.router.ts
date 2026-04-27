@@ -10,4 +10,6 @@ router.post('/signup', validate(UserSchema.createUser), userController.signupUse
 
 router.post('/signin', validate(UserSchema.signinUser), userController.signInUser)
 
+router.post('/logout', userController.logoutUser)
+
 export default router
