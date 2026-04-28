@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "PR" ALTER COLUMN "remarks" DROP NOT NULL;

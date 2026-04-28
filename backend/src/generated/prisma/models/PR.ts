@@ -225,7 +225,7 @@ export type PRGroupByOutputType = {
   remarks: string | null
   weight: number
   reps: number
-  PR: number
+  PR: number | null
   user_id: number
   created_at: Date
   updated_at: Date
@@ -260,7 +260,7 @@ export type PRWhereInput = {
   remarks?: Prisma.StringNullableFilter<"PR"> | string | null
   weight?: Prisma.FloatFilter<"PR"> | number
   reps?: Prisma.IntFilter<"PR"> | number
-  PR?: Prisma.FloatFilter<"PR"> | number
+  PR?: Prisma.FloatNullableFilter<"PR"> | number | null
   user_id?: Prisma.IntFilter<"PR"> | number
   created_at?: Prisma.DateTimeFilter<"PR"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PR"> | Date | string
@@ -273,7 +273,7 @@ export type PROrderByWithRelationInput = {
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrder
   reps?: Prisma.SortOrder
-  PR?: Prisma.SortOrder
+  PR?: Prisma.SortOrderInput | Prisma.SortOrder
   user_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -290,7 +290,7 @@ export type PRWhereUniqueInput = Prisma.AtLeast<{
   remarks?: Prisma.StringNullableFilter<"PR"> | string | null
   weight?: Prisma.FloatFilter<"PR"> | number
   reps?: Prisma.IntFilter<"PR"> | number
-  PR?: Prisma.FloatFilter<"PR"> | number
+  PR?: Prisma.FloatNullableFilter<"PR"> | number | null
   user_id?: Prisma.IntFilter<"PR"> | number
   created_at?: Prisma.DateTimeFilter<"PR"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PR"> | Date | string
@@ -303,7 +303,7 @@ export type PROrderByWithAggregationInput = {
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrder
   reps?: Prisma.SortOrder
-  PR?: Prisma.SortOrder
+  PR?: Prisma.SortOrderInput | Prisma.SortOrder
   user_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -323,7 +323,7 @@ export type PRScalarWhereWithAggregatesInput = {
   remarks?: Prisma.StringNullableWithAggregatesFilter<"PR"> | string | null
   weight?: Prisma.FloatWithAggregatesFilter<"PR"> | number
   reps?: Prisma.IntWithAggregatesFilter<"PR"> | number
-  PR?: Prisma.FloatWithAggregatesFilter<"PR"> | number
+  PR?: Prisma.FloatNullableWithAggregatesFilter<"PR"> | number | null
   user_id?: Prisma.IntWithAggregatesFilter<"PR"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"PR"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"PR"> | Date | string
@@ -334,7 +334,7 @@ export type PRCreateInput = {
   remarks?: string | null
   weight: number
   reps: number
-  PR: number
+  PR?: number | null
   created_at?: Date | string
   updated_at?: Date | string
   user: Prisma.UserCreateNestedOneWithoutPersonal_recordsInput
@@ -346,7 +346,7 @@ export type PRUncheckedCreateInput = {
   remarks?: string | null
   weight: number
   reps: number
-  PR: number
+  PR?: number | null
   user_id: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -357,7 +357,7 @@ export type PRUpdateInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
-  PR?: Prisma.FloatFieldUpdateOperationsInput | number
+  PR?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutPersonal_recordsNestedInput
@@ -369,7 +369,7 @@ export type PRUncheckedUpdateInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
-  PR?: Prisma.FloatFieldUpdateOperationsInput | number
+  PR?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -381,7 +381,7 @@ export type PRCreateManyInput = {
   remarks?: string | null
   weight: number
   reps: number
-  PR: number
+  PR?: number | null
   user_id: number
   created_at?: Date | string
   updated_at?: Date | string
@@ -392,7 +392,7 @@ export type PRUpdateManyMutationInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
-  PR?: Prisma.FloatFieldUpdateOperationsInput | number
+  PR?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -403,7 +403,7 @@ export type PRUncheckedUpdateManyInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
-  PR?: Prisma.FloatFieldUpdateOperationsInput | number
+  PR?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -530,12 +530,20 @@ export type FloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type PRCreateWithoutUserInput = {
   exercise_title: string
   remarks?: string | null
   weight: number
   reps: number
-  PR: number
+  PR?: number | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -546,7 +554,7 @@ export type PRUncheckedCreateWithoutUserInput = {
   remarks?: string | null
   weight: number
   reps: number
-  PR: number
+  PR?: number | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -586,7 +594,7 @@ export type PRScalarWhereInput = {
   remarks?: Prisma.StringNullableFilter<"PR"> | string | null
   weight?: Prisma.FloatFilter<"PR"> | number
   reps?: Prisma.IntFilter<"PR"> | number
-  PR?: Prisma.FloatFilter<"PR"> | number
+  PR?: Prisma.FloatNullableFilter<"PR"> | number | null
   user_id?: Prisma.IntFilter<"PR"> | number
   created_at?: Prisma.DateTimeFilter<"PR"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"PR"> | Date | string
@@ -598,7 +606,7 @@ export type PRCreateManyUserInput = {
   remarks?: string | null
   weight: number
   reps: number
-  PR: number
+  PR?: number | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -608,7 +616,7 @@ export type PRUpdateWithoutUserInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
-  PR?: Prisma.FloatFieldUpdateOperationsInput | number
+  PR?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -619,7 +627,7 @@ export type PRUncheckedUpdateWithoutUserInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
-  PR?: Prisma.FloatFieldUpdateOperationsInput | number
+  PR?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -630,7 +638,7 @@ export type PRUncheckedUpdateManyWithoutUserInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
   reps?: Prisma.IntFieldUpdateOperationsInput | number
-  PR?: Prisma.FloatFieldUpdateOperationsInput | number
+  PR?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -710,7 +718,7 @@ export type $PRPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
     remarks: string | null
     weight: number
     reps: number
-    PR: number
+    PR: number | null
     user_id: number
     created_at: Date
     updated_at: Date
