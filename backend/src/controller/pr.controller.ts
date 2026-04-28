@@ -111,7 +111,7 @@ const getPrById = async (req: Request, res: Response) => {
 const updatePrById = async (req: Request, res: Response) => {
     const prId = Number(req.params.id)
     const updateData = req.body
-    
+
     let updatedPr
     try {
         updatedPr = await prisma.pR.update({
@@ -140,8 +140,8 @@ const updatePrById = async (req: Request, res: Response) => {
         }
         console.log(error)
         return res.status(500).json({
-            status : 'success',
-            error : 'Internal Server Error'
+            status: 'success',
+            error: 'Internal Server Error'
         })
     }
 
@@ -150,6 +150,43 @@ const updatePrById = async (req: Request, res: Response) => {
         data: updatedPr
     })
 }
-const prController = { createPr, getAllPr, getPrById, updatePrById }
+
+const deletePr = async (req: Request, res: Response) => {
+    const prId = Number(req.params.id)
+
+    try {
+        const deleted = await prisma.pR.delete({
+            where: {
+                id: prId
+            },
+            select: {
+                id: true,
+                exercise_title: true,
+                remarks: true,
+                weight: true,
+                reps: true,
+                PR: true,
+                updated_at: true
+            }
+        })
+
+        res.status(200).json({
+            status: "success",
+            data: deleted
+        })
+    } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            if (error.code === "P2025") {
+                return res.status(404).json({
+                    status: 'failure',
+                    error: `Exercise with id ${prId} not found`
+                })
+            }
+        }
+    }
+
+}
+
+const prController = { createPr, getAllPr, getPrById, updatePrById, deletePr }
 
 export default prController

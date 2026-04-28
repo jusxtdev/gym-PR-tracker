@@ -1,4 +1,4 @@
-import express, { type Request, type Response } from "express"
+import express from "express"
 import authMiddleware from "../middleware/auth.middleware.js"
 import { validate } from "../middleware/validate.middleware.js"
 import prSchema from "../schema/pr.schema.js"
@@ -16,6 +16,6 @@ router.get('/:id', prController.getPrById)
 
 router.put('/:id', validate(prSchema.updatePr), prController.updatePrById)
 
-// router.delete('/:id')
+router.delete('/:id', prController.deletePr)
 
 export default router
