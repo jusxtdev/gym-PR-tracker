@@ -1,21 +1,36 @@
 import { config } from "dotenv";
 import express from "express"
 import cookieParser from "cookie-parser"
+import cors from "cors"
 
 import { connectDB, disconnectDB } from "./config/db.js";
 import rootRouter from "./routes/root.router.js";
+import path from "node:path";
 
 config()
 connectDB()
 
 const app = express()
+
+const corsOrigins = process.env.CORS_ORIGIN?.split(",").map((o) => o.trim()).filter(Boolean) ?? [
+    "http://localhost:5173",
+]
+app.use(
+    cors({
+        origin: corsOrigins,
+        credentials: true,
+    }),
+)
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser())
+app.set("view engine", "ejs")
+app.set("views", path.join(__dirname, "../views"))
+
 const PORT = process.env.PORT || 3000;
 
 app.use('/api', rootRouter)
-
 
 
 const server = app.listen(PORT, () => {

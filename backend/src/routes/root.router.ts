@@ -6,10 +6,11 @@ import prRouter from "./pr.router.js"
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    res.status(200).json({
+    const data = {
         status: "success",
         msg: "Gym Personal Record Tracker"
-    })
+    }
+    res.render("index", data)
 })
 
 router.use('/auth', authRouter)
