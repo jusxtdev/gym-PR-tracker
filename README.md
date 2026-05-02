@@ -2,6 +2,10 @@
 
 A small full-stack project: an Express + PostgreSQL API for tracking gym personal records (weight × reps per exercise), plus a React SPA that talks to it.
 
+## Deployment
+- Both backend and frontend are deployed on (render.com)[https://render.com/]
+- Live URL - (gym-PR-tracker)[https://gym-pr-tracker-frontend.onrender.com]
+
 ## Disclosure (frontend)
 
 **I did not build the frontend myself.** The UI in `frontend/` was produced with **AI assistance** (generated code and design choices). I’m stating this explicitly so it’s clear where my own work sits versus tooling—I focus on backend work, and I don’t want anyone reviewing this repo (for example, a recruiter) to assume I authored the frontend as part of my core skill set.
