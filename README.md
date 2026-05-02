@@ -3,8 +3,8 @@
 A small full-stack project: an Express + PostgreSQL API for tracking gym personal records (weight × reps per exercise), plus a React SPA that talks to it.
 
 ## Deployment
-- Both backend and frontend are deployed on (render.com)[https://render.com/]
-- Live URL - (gym-PR-tracker)[https://gym-pr-tracker-frontend.onrender.com]
+- Both backend and frontend are deployed on [render.com](https://render.com/)
+- Live URL - [gym-PR-tracker](https://gym-pr-tracker-frontend.onrender.com)
 
 ## Disclosure (frontend)
 
