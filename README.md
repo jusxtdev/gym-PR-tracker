@@ -45,6 +45,40 @@ npm run dev
 
 The dev server is usually **http://localhost:5173**. Ensure the backend allows this origin via `CORS_ORIGIN` (comma-separated if you need several URLs).
 
+### Frontend URL vs API paths (common confusion)
+
+- **`https://your-app.vercel.app/login`** — This is the **React app route** for the login screen. It is **not** supposed to match the backend path. The browser loads the SPA; JavaScript then calls the API on Railway.
+- **Backend auth endpoints** (no `/login` name):
+  - Sign-in: **`POST /api/auth/signin`**
+  - Sign-up: **`POST /api/auth/signup`**
+  - Log out: **`POST /api/auth/logout`**
+
+So the full sign-up URL your frontend calls is:
+
+`{VITE_API_BASE_URL}/auth/signup`
+
+which resolves to:
+
+`https://<your-railway-host>/api/auth/signup`
+
+when `VITE_API_BASE_URL` is `https://<your-railway-host>/api`.
+
+### Deploying: Vercel (frontend) + Railway (backend)
+
+1. **Railway — `CORS_ORIGIN`**  
+   Set to your **exact** Vercel origin(s), e.g. `https://your-app.vercel.app`.  
+   For Preview deployments, add multiple origins separated by commas (no spaces unless trimmed).  
+   If this is wrong or missing, the browser blocks requests and sign-up/sign-in look like generic failures.
+
+2. **Vercel — `VITE_API_BASE_URL`**  
+   Must be your **public Railway HTTPS URL** with the **`/api` suffix**, no trailing slash, for example:
+
+   `https://your-service.up.railway.app/api`
+
+   Vite reads this **at build time**. After you add or change it in the Vercel project settings, **trigger a new deployment**.
+
+3. **Wrong base URL** — If you omit `/api`, requests go to `https://railway-host/auth/signup` instead of `/api/auth/signup` and will fail.
+
 ## Environment variables (overview)
 
 - **Backend:** `DATABASE_URL`, `JWT_SECRET`, `JWT_EXPIRES_IN`, `NODE_ENV`; optional `PORT`, `CORS_ORIGIN`.

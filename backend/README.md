@@ -27,8 +27,8 @@ Optional:
 
 | Variable | Description |
 |----------|-------------|
-| `PORT` | Server port (default **3000**) |
-| `CORS_ORIGIN` | Comma-separated allowed browser origins. Defaults to `http://localhost:5173` if unset. |
+| `PORT` | Server port (Railway usually injects `PORT` automatically.) |
+| `CORS_ORIGIN` | Comma-separated allowed browser origins (scheme + host, no path). Defaults to `http://localhost:5173` if unset. **Production:** include your SPA origin, e.g. `https://your-app.vercel.app`. Omit trailing slashes. Required for browser requests from Vercel → Railway. |
 
 Create a `.env` file in **`backend/`** (do not commit secrets). Example shape:
 

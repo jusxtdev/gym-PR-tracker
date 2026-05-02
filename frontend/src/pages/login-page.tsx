@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { ApiError } from "@/lib/api/client"
+import { formatAuthMutationError } from "@/lib/format-auth-error"
 import * as authApi from "@/lib/api/auth"
 import { useAuth } from "@/providers/auth-provider"
 import { type SignInForm, signInSchema } from "@/schemas/auth"
@@ -35,8 +35,7 @@ export function LoginPage() {
       navigate(from, { replace: true })
     },
     onError: (err: unknown) => {
-      const msg = err instanceof ApiError ? err.message : "Could not sign in"
-      toast.error(msg)
+      toast.error(formatAuthMutationError(err, "Could not sign in"))
     },
   })
 
